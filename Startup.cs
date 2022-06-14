@@ -1,3 +1,4 @@
+using api_crud.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,10 @@ namespace api_crud
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Injeção de dependencia, conectando repositorio na interface.
+            //Isso proporciona um desacoplamento entre as camadas, através da nossa interface sabemos qual são as assinaturas do nosso repositório.
+            services.AddTransient<IClienteRepository, ClienteRepository>();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
