@@ -13,7 +13,7 @@ namespace api_crud.Models
         [Required, StringLength(50)]
         public string Nome { get; set; }
 
-        public string Sobrenome { get; set; }
+        public string Cpf { get; set; }
 
     }
 }

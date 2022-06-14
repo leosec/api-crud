@@ -1,5 +1,7 @@
 ﻿using api_crud.Models;
+using Dapper;
 using Microsoft.Extensions.Configuration;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,27 +32,54 @@ namespace api_crud.Repository
 
         public Cliente Selecionar(int id)
         {
-            throw new NotImplementedException();
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                return conexao.Query<Cliente>("SELECT Id, Nome, Cpf WHERE Id = @Id", new { Id = id }).FirstOrDefault();
+            }
         }
 
         public IEnumerable<Cliente> Listar()
         {
-            throw new NotImplementedException();
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                return conexao.Query<Cliente>("SELECT Id, Nome, Cpf FROM Cliente");
+            }
         }
 
         public void Persistir(Cliente cliente)
         {
-            throw new NotImplementedException();
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Execute("INSERT INTO Cliente VALUES (@Nome, @Cpf)", new
+                {
+                    Nome = cliente.Nome,
+                    Cpf = cliente.Cpf
+                });
+            }
         }
 
         public void Atualizar(Cliente cliente)
         {
-            throw new NotImplementedException();
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Execute("UPDATE Cliente SET Nome = @Nome, Cpf = @Cpf WHERE Id = @Id", new
+                {
+                    Nome = cliente.Nome,
+                    Cpf = cliente.Cpf,
+                    Id = cliente.Id
+                });
+            }
         }
 
         public void Excluir(int id)
         {
-            throw new NotImplementedException();
+            using (var conexao = new MySqlConnection(_conexao))
+            {
+                conexao.Execute("DELETE FROM Cliente WHERE Id = @Id", new
+                {
+                    Id = id
+                });
+            }
         }
     }
 }
