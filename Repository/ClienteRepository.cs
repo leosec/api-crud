@@ -50,7 +50,7 @@ namespace api_crud.Repository
         {
             using (var conexao = new MySqlConnection(_conexao))
             {
-                conexao.Execute("INSERT INTO Cliente VALUES (@Nome, @Cpf)", new
+                conexao.Execute("INSERT INTO Cliente (Nome, Cpf) VALUES (@Nome, @Cpf)", new
                 {
                     Nome = cliente.Nome,
                     Cpf = cliente.Cpf

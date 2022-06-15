@@ -29,7 +29,7 @@ namespace api_crud
             //Injeção de dependencia, conectando repositorio na interface.
             //Isso proporciona um desacoplamento entre as camadas, através da nossa interface sabemos qual são as assinaturas do nosso repositório.
             services.AddTransient<IClienteRepository, ClienteRepository>();
-
+            services.AddMvcCore();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
