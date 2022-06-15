@@ -33,7 +33,7 @@ namespace api_crud.Controllers
             {
                 var data = _clienteRepository.Listar();
                 Clientes = data;
-                _logger.LogInformation(1002,"Retornado " + data.Count() + " objetos na consulta GET.");
+                _logger.LogInformation(1001,"Retornado " + data.Count() + " objetos na consulta GET.");
                 return Ok(data);
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace api_crud.Controllers
             try
             {
                 _clienteRepository.Excluir(id);
-                _logger.LogInformation(1002,"Deletado ID " + id + " no banco de dados.");
+                _logger.LogInformation(1005,"Deletado ID " + id + " no banco de dados.");
                 return Ok("Excluido objeto id:" + id);
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace api_crud.Controllers
             {
                 
                 _clienteRepository.Persistir(cliente);
-                _logger.LogInformation(1002,"Inserido objetos na tabela Cliente do banco de dados");
+                _logger.LogInformation(1003,"Inserido objetos na tabela Cliente do banco de dados");
                 return Ok(cliente);
             }
             catch (Exception ex)
