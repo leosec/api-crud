@@ -39,14 +39,19 @@ namespace api_crud
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api_crud v1"));
             }
+
+            var logger = loggerFactory.CreateLogger("Catchall Endpoint");
+            logger.LogInformation("Inicializando Logs no startup");
+
 
             app.UseRouting();
 
