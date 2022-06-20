@@ -77,6 +77,23 @@ namespace api_crud.Controllers
             }
         }
 
+        [HttpPatch]
+        public IActionResult UpdateCliente(Cliente cliente)
+        {
+            try
+            {
+                _clienteRepository.Atualizar(cliente);
+                _logger.LogInformation(1003, "Atualizando objetos na tabela Cliente do banco de dados");
+                return Ok(cliente);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                _logger.LogError("Encontrado problemas: " + ex.Message);
+                return new StatusCodeResult(500);
+            }
+        }
+
 
     }
 }
