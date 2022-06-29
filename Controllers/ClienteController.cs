@@ -60,14 +60,15 @@ namespace api_crud.Controllers
         }
 
         [HttpPost]
-        public IActionResult InsertCliente(Cliente cliente)
+        public async Task<IActionResult> InsertCliente(Cliente cliente)
         {
+            Cliente responseCreate;
             try
             {
-                
-                _clienteRepository.Persistir(cliente);
+
+                responseCreate = await _clienteRepository.Persistir(cliente);
                 _logger.LogInformation(1003,"Inserido objetos na tabela Cliente do banco de dados");
-                return Ok(cliente);
+                return Ok(responseCreate);
             }
             catch (Exception ex)
             {

@@ -14,7 +14,7 @@ namespace api_crud.Repository
     {
         Cliente Selecionar(int id);
         IEnumerable<Cliente> Listar();
-        void Persistir(Cliente cliente);
+        public Task<Cliente> Persistir(Cliente cliente);
         void Atualizar(Cliente cliente);
         void Excluir(int id);
     }
@@ -46,9 +46,9 @@ namespace api_crud.Repository
             }
         }
 
-        public void Persistir(Cliente cliente)
+        public async Task<Cliente> Persistir(Cliente cliente)
         {
-            using (var conexao = new MySqlConnection(_conexao))
+            await using (var conexao = new MySqlConnection(_conexao))
             {
                 conexao.Execute("INSERT INTO Cliente (Nome, Cpf) VALUES (@Nome, @Cpf)", new
                 {
@@ -56,6 +56,7 @@ namespace api_crud.Repository
                     Cpf = cliente.Cpf
                 });
             }
+            return cliente;
         }
 
         public void Atualizar(Cliente cliente)
